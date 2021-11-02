@@ -58,9 +58,9 @@ namespace OnelityAssigment.Services
             await _repository.Update(participant);
         }
 
-        public async Task<List<Participant>> AllByConference(int conferenceId)
+        public Task<List<Participant>> AllByConference(int conferenceId)
         {
-            return await _repository.FindManyByCondition( p => p.ConferenceId == conferenceId);
+            return _repository.AllByConferenceId(conferenceId);
         }
 
         public async Task<List<Participant>> All()
