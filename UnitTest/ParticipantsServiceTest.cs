@@ -4,6 +4,7 @@ using OnelityAssigment.Repository;
 using OnelityAssigment.Services;
 using OnelityAssigmentUnitTest.RepositoryTest;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -42,19 +43,24 @@ namespace OnelityAssigmentUnitTest
         [Fact]
         public async Task AllTest()
         {
-            await _service.All();
+            _mockRepository.ShouldReturnList();
+
+            var result = await _service.All();
 
             _mockRepository.ToHaveEnquiredToFindAll();
+            Assert.IsType<List<Participant>>(result);
         }
 
         [Fact]
         public async Task AllByConferenceTest()
         {
             int conferenceId = 2;
+            _mockRepository.ShouldReturnListWith(conferenceId);
 
-            await _service.AllByConference(conferenceId);
+            var result = await _service.AllByConference(conferenceId);
 
             _mockRepository.ToHaveEnquiredToFindAllByConference(conferenceId);
+            Assert.IsType<List<Participant>>(result);
         }
 
         [Fact]
